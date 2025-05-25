@@ -8,7 +8,7 @@ RUN a2enmod rewrite
 WORKDIR /var/www/html
 
 # Copy the PHP script into the container
-COPY payload_logger.php /var/www/html/
+COPY index.php /var/www/html/
 
 # Expose port 80
 EXPOSE 80

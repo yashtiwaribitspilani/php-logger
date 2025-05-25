@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 const WEBHOOK_TOKEN       = 'e3f1c9b7a4d2f5e6c8b1a9d0f7e3c2b1'; 
 const LOG_DIRECTORY       = __DIR__ . '/webhook_logs';
 const DEFAULT_FILE_PREFIX = 'no_reference_';
@@ -32,14 +31,12 @@ function logPayloadToFile(array $orderDetails): void
 
 function main(): void
 {
-    
     $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
     $token = trim(substr($authHeader, 7));
     if (stripos($authHeader, 'Bearer ') !== 0 || $token !== WEBHOOK_TOKEN) {
         sendJsonResponse(401, ['error' => 'Unauthorized']);
     }
 
-    
     $rawBody = file_get_contents('php://input');
     $decodedPayload = json_decode($rawBody, true);
     if (json_last_error() !== JSON_ERROR_NONE || !is_array($decodedPayload)) {

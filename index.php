@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-const WEBHOOK_TOKEN       = 'e3f1c9b7a4d2f5e6c8b1a9d0f7e3c2b1'; 
+const WEBHOOK_TOKEN       = 'e3f1c9b7a4d2f5e6c8b1a9d0f7e3c2b1';
 const LOG_DIRECTORY       = __DIR__ . '/webhook_logs';
 const DEFAULT_FILE_PREFIX = 'no_reference_';
 
@@ -16,6 +16,10 @@ function sendJsonResponse(int $statusCode, array $body): void
 
 function logPayloadToFile(array $orderDetails): void
 {
+    // Log the payload to Render logs
+    error_log("Received payload: " . json_encode($orderDetails));
+
+    // Optionally, log to a file (ensure directory exists)
     if (!is_dir(LOG_DIRECTORY)) {
         mkdir(LOG_DIRECTORY, 0777, true);
     }

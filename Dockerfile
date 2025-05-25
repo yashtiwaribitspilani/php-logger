@@ -7,8 +7,8 @@ RUN a2enmod rewrite
 # Set the working directory
 WORKDIR /var/www/html
 
-# Copy the PHP script into the container
-COPY index.php /var/www/html/
+# Copy the PHP script and .htaccess into the container
+COPY index.php .htaccess /var/www/html/
 
 # Expose port 80
 EXPOSE 80
